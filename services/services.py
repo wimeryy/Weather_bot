@@ -6,6 +6,7 @@ config: Config = load_config()
 api_key_geo = config.Weather_bot.api_key_geo
 api_key = config.Weather_bot.api_key
 
+
 def get_weather_city(city):
     base_url = "http://api.weatherstack.com/current"
     params = {
@@ -19,6 +20,7 @@ def get_weather_city(city):
     else:
         return "ERROR"
 
+
 def get_weather_geo(latitude, longitude):
     base_url = f"http://api.weatherstack.com/current?access_key={api_key}&query={latitude},{longitude}"
     response = requests.get(base_url)
@@ -28,6 +30,7 @@ def get_weather_geo(latitude, longitude):
         return f"Погода в {city}: {data['current']['temperature']}°C🌡️, {data['current']['weather_descriptions'][0]}{LEXICON_EMODJI[data['current']['weather_descriptions'][0]]}"
     else:
         return "ERROR"
+
 
 def process_get_city(latitude, longitude):
     geocoder = OpenCageGeocode(api_key_geo)

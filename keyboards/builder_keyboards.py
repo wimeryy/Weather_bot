@@ -4,6 +4,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
+
 def create_inline_keyboard(*buttons: str) -> InlineKeyboardMarkup:
     kb_builder = InlineKeyboardBuilder()
     kb_builder.row(*[InlineKeyboardButton(
@@ -11,6 +12,7 @@ def create_inline_keyboard(*buttons: str) -> InlineKeyboardMarkup:
         callback_data=button) for button in buttons]
     )
     return kb_builder.as_markup()
+
 
 kb_builder = ReplyKeyboardBuilder()
 

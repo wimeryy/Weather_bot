@@ -1,14 +1,18 @@
 from dataclasses import dataclass
 from environs import Env
 
+
 @dataclass
 class TgBot:
     token: str
     api_key: str
     api_key_geo: str
+
+
 @dataclass
 class Config:
     Weather_bot: TgBot
+
 
 def load_config(path: str | None = None) -> Config:
     env = Env()

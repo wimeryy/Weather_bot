@@ -2,7 +2,7 @@ from aiogram import F, Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 from lexicon.lexicon import LEXICON, LEXICON_COUNTRIES
-from keyboards.builder_keyboards import create_inline_keyboard, keyboard
+from keyboards.builder_keyboards import keyboard
 from services.services import get_weather_city, get_weather_geo
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
@@ -14,13 +14,16 @@ router = Router()
 async def process_start_command(message: Message):
     await message.answer(LEXICON[message.text])
 
+
 @router.message(Command(commands='help'))
 async def process_help_command(message: Message):
     await message.answer(LEXICON['/help'])
 
+
 @router.message(Command(commands='weather'))
 async def process_weather_command(message: Message):
     await message.answer(LEXICON['/weather'], reply_markup=keyboard)
+
 
 @router.message(F.text == None)
 async def process_get_weather_geo(message: Message):
@@ -32,6 +35,7 @@ async def process_get_weather_geo(message: Message):
     else:
         await message.answer("Не удалось получить данные о погоде.")
 
+
 @router.message(F.text == LEXICON['/weather_chose'])
 async def process_city_chose(message: Message):
     buttons = [KeyboardButton(text=city) for city in LEXICON_COUNTRIES]
@@ -40,10 +44,12 @@ async def process_city_chose(message: Message):
 
     await message.answer(LEXICON['/weather_text'], reply_markup=keyboard)
 
+
 @router.message(F.text.in_(LEXICON_COUNTRIES))
 async def process_get_weather(message: Message):
     city = message.text
     await message.answer(get_weather_city(city=city))
+
 
 @router.message()
 async def send_echo(message: Message):

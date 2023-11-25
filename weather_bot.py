@@ -8,18 +8,16 @@ from handlers import callback_handlers, message_handlers
 
 logger = logging.getLogger(__name__)
 
+
 async def main():
     logging.basicConfig(
         level=logging.INFO,
         format='%(filename)s:%(lineno)d #%(levelname)-8s '
                '[%(asctime)s] - %(name)s - %(message)s')
 
-
     logger.info('Starting bot')
 
-
     config: Config = load_config()
-
 
     bot = Bot(token=config.Weather_bot.token,
               parse_mode='HTML')
